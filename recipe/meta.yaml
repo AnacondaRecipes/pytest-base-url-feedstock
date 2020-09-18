@@ -1,7 +1,7 @@
 {% set name = "pytest-base-url" %}
-{% set version = "1.4.1" %}
+{% set version = "1.4.2" %}
 {% set hash_type = "sha256" %}
-{% set hash = "7425e8163345494ac7f544e99c6f3e5a08f4228bee5e26013b98c462a4d31f6e" %}
+{% set hash = "7f1f32e08c2ee751e59e7f5880235b46e83496adc5cba5a01ca218c6fe81333d" %}
 
 package:
   name: {{ name }}
