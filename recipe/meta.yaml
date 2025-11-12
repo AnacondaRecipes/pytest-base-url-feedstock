@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pytest_base_url-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-','_') }}-{{ version }}.tar.gz
   sha256: 02748589a54f9e63fcbe62301d6b0496da0d10231b753e950c63e03aee745d45
 
 build:
@@ -26,12 +26,19 @@ requirements:
     - requests >=2.9
 
 test:
+  source_files:
+    - tests
   imports:
     - pytest_base_url
   commands:
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - pytest -vv
   requires:
     - pip
+    - pytest
+    - pytest-metadata
+    - pytest-localserver >=0.7.1
 
 about:
   home: https://github.com/pytest-dev/pytest-base-url
@@ -39,6 +46,9 @@ about:
   license_family: OTHER
   license_file: LICENSE
   summary: pytest plugin for URL based testing
+  description: |
+    pytest-base-url is a simple plugin for pytest that provides
+    an optional base URL via the command line or configuration file.
   dev_url: https://github.com/pytest-dev/pytest-base-url
   doc_url: https://github.com/pytest-dev/pytest-base-url
 
